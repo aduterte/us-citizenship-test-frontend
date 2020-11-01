@@ -8,11 +8,20 @@ export default function QuestionContainer(){
         [q, setQ] = useState(null),
         [showAnswer, setShowAnswer] = useState(false)
 
+    // const getQuestion = () => {
+    //     const randomQ = questions[Math.floor(Math.random() * questions.length)]
+    //     setQuestions([...questions.filter(x=> x !== randomQ)])
+    //     setQ(randomQ)
+    //     }
+    // eslint-disable-next-line
     useEffect(()=>{
         const randomQ = questions[Math.floor(Math.random() * questions.length)]
-        setQuestions(questions.filter(x=> x !== randomQ))
+        setQuestions([...questions.filter(x=> x !== randomQ)])
         setQ(randomQ)
-    },[questions,setQuestions])
+        // eslint-disable-next-line react-hooks/exhaustive-deps  
+    },[])
+
+    
     // function getQuestion(){
     //     const q = questions[Math.floor(Math.random() * questions.length)]
     //     return q.question
