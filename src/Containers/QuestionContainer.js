@@ -22,10 +22,13 @@ export default function QuestionContainer(){
     },[])
 
     
-    // function getQuestion(){
-    //     const q = questions[Math.floor(Math.random() * questions.length)]
-    //     return q.question
-    // }
+    function getQuestion(){
+        const randomQ = questions[Math.floor(Math.random() * questions.length)]
+        setQuestions([...questions.filter(x=> x !== randomQ)])
+        setShowAnswer(false)
+        setQ(randomQ)
+    }
+
     return (
         <div className="questions-container">
             <div className="question">
@@ -35,9 +38,13 @@ export default function QuestionContainer(){
                 {showAnswer ? <ul>
                     {q && q.answers.map((x,i)=> <li key={i}>{x}</li> )}
                 </ul> :
-                <div onClick={()=>setShowAnswer(!showAnswer)}>Show Answer</div>
-                }
-                
+                <div className="show-answer-button" onClick={()=>setShowAnswer(!showAnswer)}>Show Answer</div>
+                }    
+            </div>
+            <div onClick={()=>getQuestion()}className="bottom-nav">
+                <div className="next-question">
+                    Next Question
+                </div>
             </div>
             
         </div>
