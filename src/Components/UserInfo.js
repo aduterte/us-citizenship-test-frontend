@@ -1,16 +1,44 @@
 import React, {useState} from "react"
 import { userAtom } from "../Atom"
-import { useRecoilState } from "recoil"
+import { useSetRecoilState } from "recoil"
 
 export default function UserInfo(){
 
-    const [user, setUser]= useRecoilState(userAtom),
-        [info, setInfo] = useState({address: null})
+    const setUser = useSetRecoilState(userAtom),
+        [info, setInfo] = useState({address: "", state: "", zip: ""})
 
+    function handleChange(e){
+        setInfo({...info, [e.target.name]: e.target.value})
+        console.log(info)
+    }
+    function handleSubmit(e){
+        e.preventDefault()
+        fetch(`https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=${info.address}%20${info.state}%20${info.zip}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+            const obj = {
+                potus: data.officials[0].name,
+                vice: data.officials[1].name,
+                senators: [data.officials[2].name, data.officials[3].name],
+                house: data.officials[4].name,
+                gov: data.officials[5].name,
+                potusParty: data.officials[0].party
+            }
+            setUser(obj)
+            console.log(obj)
+        })
+    }
     return (
         <div>
-            <form>
-                <input type="text" value={info.address}/>
+            <form onSubmit={handleSubmit}>
+                <div>Enter Address</div>
+                <input onChange={handleChange} name="address" type="text" value={info.address}/>
+                <div>Enter State</div>
+                <input onChange={handleChange} name="state" type="text" value={info.state}/>
+                <div>Enter Zipcode</div>
+                <input onChange={handleChange} name="zip" type="text" value={info.zip}/>
+                <div onClick={handleSubmit}>Submit</div>
             </form>
         </div>
     )
