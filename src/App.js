@@ -6,7 +6,7 @@ import QuestionContainer from "./Containers/QuestionContainer";
 import UserInfo from "./Components/UserInfo"
 
 function App() {
-
+  console.log(process.env.REACT_APP_GOOGLE_API_KEY)
   const [questions, setQuestions] = useRecoilState(questAtom),
     info = useRecoilValue(userAtom)
   useEffect(()=>{
