@@ -1,12 +1,14 @@
 import React, {useEffect} from "react"
-import {questAtom} from "./Atom"
-import {useRecoilState} from "recoil"
+import {questAtom, userAtom} from "./Atom"
+import {useRecoilState, useRecoilValue} from "recoil"
 import './App.css';
 import QuestionContainer from "./Containers/QuestionContainer";
+import UserInfo from "./Components/UserInfo"
 
 function App() {
 
-  const [questions, setQuestions] = useRecoilState(questAtom)
+  const [questions, setQuestions] = useRecoilState(questAtom),
+    info = useRecoilValue(userAtom)
   useEffect(()=>{
     fetch("https://enigmatic-forest-15161.herokuapp.com/questions")
     .then(resp => resp.json())
@@ -15,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      {questions && <QuestionContainer/>}
+      {!info ? <UserInfo/> : questions && <QuestionContainer/>}
       
     </div>
   );
