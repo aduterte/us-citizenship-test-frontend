@@ -52,7 +52,7 @@ export default function QuestionContainer(){
                 setQ(que)
                 // randomQ.answers = [userInfo.gov]
             } else if (randomQ.question.includes("party")){
-                debugger
+                // debugger
                 const que = {question: randomQ.question, answers: [userInfo.potusParty]}
                 setQ(que)
             }

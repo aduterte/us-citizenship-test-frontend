@@ -26,7 +26,7 @@ export default function UserInfo(){
                 potusParty: data.officials[0].party
             }
             setUser(obj)
-            console.log(obj)
+            // console.log(obj)
         })
     }
     return (
