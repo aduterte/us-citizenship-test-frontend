@@ -80,3 +80,26 @@
   align-items: center;
   justify-content: center;
 }
+
+.user-container {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.user-form {
+  background-color: black;
+  font-size: 29px;
+  color:white;
+  display: flex;
+  height: 50vh;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 50vw;
+}
+.user-form input{
+  height: 50px;
+
+  font-size: 29px;
+}

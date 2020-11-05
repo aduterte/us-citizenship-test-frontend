@@ -9,14 +9,14 @@ export default function UserInfo(){
 
     function handleChange(e){
         setInfo({...info, [e.target.name]: e.target.value})
-        console.log(info)
+        // console.log(info)
     }
     function handleSubmit(e){
         e.preventDefault()
         fetch(`https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=${info.address}%20${info.state}%20${info.zip}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             const obj = {
                 potus: data.officials[0].name,
                 vice: data.officials[1].name,
@@ -30,15 +30,15 @@ export default function UserInfo(){
         })
     }
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="user-container">
+            <form  className="user-form" onSubmit={handleSubmit}>
                 <div>Enter Address</div>
                 <input onChange={handleChange} name="address" type="text" value={info.address}/>
                 <div>Enter State</div>
                 <input onChange={handleChange} name="state" type="text" value={info.state}/>
                 <div>Enter Zipcode</div>
                 <input onChange={handleChange} name="zip" type="text" value={info.zip}/>
-                <div onClick={handleSubmit}>Submit</div>
+                <div className="show-answer-button" onClick={handleSubmit}>Submit</div>
             </form>
         </div>
     )

@@ -7,7 +7,8 @@ export default function QuestionContainer(){
     const [questions, setQuestions] = useRecoilState(questAtom),
         userInfo = useRecoilValue(userAtom),
         [q, setQ] = useState(null),
-        [showAnswer, setShowAnswer] = useState(false)
+        [showAnswer, setShowAnswer] = useState(false),
+        [count, setCount] = useState(1)
 
    
     useEffect(()=>{
@@ -20,6 +21,8 @@ export default function QuestionContainer(){
 
     
     function getQuestion(){
+        let i = count + 1
+        setCount(i)
         const randomQ = questions[Math.floor(Math.random() * questions.length)]
         setQuestions([...questions.filter(x=> x !== randomQ)])
         setShowAnswer(false)
@@ -27,7 +30,7 @@ export default function QuestionContainer(){
     }
 
     function checkExternal(randomQ){
-        console.log(randomQ)
+        console.log(count)
         if (randomQ.external === true){
             // console.log(userInfo)
             // debugger
@@ -75,12 +78,13 @@ export default function QuestionContainer(){
                 <div className="show-answer-button" onClick={()=>setShowAnswer(!showAnswer)}>Show Answer</div>
                 }    
             </div>
+            {count <= 99 &&
             <div onClick={()=>getQuestion()}className="bottom-nav">
                 <div className="next-question">
                     Next Question
                 </div>
             </div>
-            
+            }       
         </div>
     )
 }
