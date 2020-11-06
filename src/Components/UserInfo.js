@@ -16,14 +16,15 @@ export default function UserInfo(){
         fetch(`https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=${info.address}%20${info.state}%20${info.zip}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
         .then(resp => resp.json())
         .then(data => {
-            // console.log(data)
+            console.log(data)
             const obj = {
                 potus: data.officials[0].name,
                 vice: data.officials[1].name,
                 senators: [data.officials[2].name, data.officials[3].name],
                 house: data.officials[4].name,
                 gov: data.officials[5].name,
-                potusParty: data.officials[0].party
+                potusParty: data.officials[0].party,
+                state: data.normalizedInput.state
             }
             setUser(obj)
             // console.log(obj)

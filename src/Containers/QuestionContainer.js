@@ -10,7 +10,8 @@ export default function QuestionContainer(){
         [showAnswer, setShowAnswer] = useState(false),
         [count, setCount] = useState(1)
 
-   
+    const capitals = {AL: "Montgomery", AK: "Juneau", AZ: "Pheonix", AR: "Little Rock", CA: "Sacremento", CO: "Denver", CT: "Hartford", DE: "Dover",FL: "Tallahassee", GA: "Atlanta", HI: "Honolulu", ID: "Boise", IL: "Springfield", IN: "Indianaoplis",IA: "Des Moines", KS: "Topeka", KY: "Frankfort", LA: "Baton Rouge", ME: "Augusta", MD: "Annapolis", MA: "Boston", MI: "Lansing", MN: "St. Paul", MS: "Jackson", MO: "Jefferson City", MT: "Helena", NE: "Lincoln", NV: "Carson City", NH: "Concord", NJ: "Trenton", NM: "Santa Fe", NY: "Albany", NC: "Raleigh", ND: "Bismarck", OH: "Columbus", OK: "Oklahoma City:", OR: "Salem", PA: "Harrisburg", RI: "Providence", SC: "Columbia", SD: "Pierre", TN: "Nashville", TX: "Austin", UT: "Salt Lake City", VT: "Montpelier", VA:"Ricmond", WA: "Olympia", WV: "Charleston", WI: "Madison", WY: "Cheyenne" }
+
     useEffect(()=>{
         // const randomQ = questions[Math.floor(Math.random() * questions.length)]
         // setQuestions([...questions.filter(x=> x !== randomQ)])
@@ -30,6 +31,7 @@ export default function QuestionContainer(){
     }
 
     function checkExternal(randomQ){
+        const capitals = {AL: "Montgomery", AK: "Juneau", AZ: "Pheonix", AR: "Little Rock", CA: "Sacremento", CO: "Denver", CT: "Hartford", DE: "Dover",FL: "Tallahassee", GA: "Atlanta", HI: "Honolulu", ID: "Boise", IL: "Springfield", IN: "Indianaoplis",IA: "Des Moines", KS: "Topeka", KY: "Frankfort", LA: "Baton Rouge", ME: "Augusta", MD: "Annapolis", MA: "Boston", MI: "Lansing", MN: "St. Paul", MS: "Jackson", MO: "Jefferson City", MT: "Helena", NE: "Lincoln", NV: "Carson City", NH: "Concord", NJ: "Trenton", NM: "Santa Fe", NY: "Albany", NC: "Raleigh", ND: "Bismarck", OH: "Columbus", OK: "Oklahoma City:", OR: "Salem", PA: "Harrisburg", RI: "Providence", SC: "Columbia", SD: "Pierre", TN: "Nashville", TX: "Austin", UT: "Salt Lake City", VT: "Montpelier", VA:"Ricmond", WA: "Olympia", WV: "Charleston", WI: "Madison", WY: "Cheyenne" }
         console.log(count)
         if (randomQ.external === true){
             // console.log(userInfo)
@@ -58,6 +60,13 @@ export default function QuestionContainer(){
                 // debugger
                 const que = {question: randomQ.question, answers: [userInfo.potusParty]}
                 setQ(que)
+            } else if (randomQ.question.includes("capital of your state")){
+                debugger
+                const que = {question: randomQ.question, answers: [capitals[userInfo.state]]}
+                setQ(que)
+            } else if (randomQ.question.includes("Chief Justice")){
+                const que = {question: randomQ.question, answers: ["John Roberts"]}
+                setQ(que)
             }
             
             // console.log(q)
@@ -78,7 +87,7 @@ export default function QuestionContainer(){
                 <div className="show-answer-button" onClick={()=>setShowAnswer(!showAnswer)}>Show Answer</div>
                 }    
             </div>
-            {count <= 99 &&
+            {count <= 100 &&
             <div onClick={()=>getQuestion()}className="bottom-nav">
                 <div className="next-question">
                     Next Question

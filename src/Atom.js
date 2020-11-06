@@ -9,3 +9,4 @@ export const userAtom = atom({
     key: "userInfo",
     default: null
 })
+
